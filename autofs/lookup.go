@@ -8,15 +8,15 @@ import (
 	"io/fs"
 	"sync"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/awssmfs"
-	"github.com/hairyhenderson/go-fsimpl/awssmpfs"
-	"github.com/hairyhenderson/go-fsimpl/blobfs"
-	"github.com/hairyhenderson/go-fsimpl/consulfs"
-	"github.com/hairyhenderson/go-fsimpl/filefs"
-	"github.com/hairyhenderson/go-fsimpl/gitfs"
-	"github.com/hairyhenderson/go-fsimpl/httpfs"
-	"github.com/hairyhenderson/go-fsimpl/vaultfs"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/awssmfs"
+	"github.com/helmwave/go-fsimpl/awssmpfs"
+	"github.com/helmwave/go-fsimpl/blobfs"
+	"github.com/helmwave/go-fsimpl/consulfs"
+	"github.com/helmwave/go-fsimpl/filefs"
+	"github.com/helmwave/go-fsimpl/gitfs"
+	"github.com/helmwave/go-fsimpl/httpfs"
+	"github.com/helmwave/go-fsimpl/vaultfs"
 )
 
 //nolint:gochecknoglobals

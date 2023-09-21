@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/go-git/go-billy/v5"
-	"github.com/hairyhenderson/go-fsimpl/internal"
+	"github.com/helmwave/go-fsimpl/internal"
 )
 
 func BillyToFS(bfs billy.Filesystem) fs.ReadDirFS {

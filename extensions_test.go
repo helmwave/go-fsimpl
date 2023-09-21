@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl/internal"
+	"github.com/helmwave/go-fsimpl/internal"
 	"github.com/stretchr/testify/assert"
 )
 

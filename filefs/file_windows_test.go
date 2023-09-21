@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl/internal/tests"
+	"github.com/helmwave/go-fsimpl/internal/tests"
 	"github.com/stretchr/testify/assert"
 	tfs "gotest.tools/v3/fs"
 )

@@ -8,8 +8,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/hairyhenderson/go-fsimpl/internal/env"
 	"github.com/hashicorp/vault/api"
+	"github.com/helmwave/go-fsimpl/internal/env"
 )
 
 // adapter for a legacy [AuthMethod] to the
@@ -60,7 +60,7 @@ type AuthMethod interface {
 //
 // Note that this is not required if $VAULT_TOKEN is set.
 //
-// Deprecated: use [github.com/hairyhenderson/go-fsimpl/vaultfs/vaultauth.WithAuthMethod] instead
+// Deprecated: use [github.com/helmwave/go-fsimpl/vaultfs/vaultauth.WithAuthMethod] instead
 func WithAuthMethod(auth AuthMethod, fsys fs.FS) fs.FS {
 	if afsys, ok := fsys.(withAPIAuthMethoder); ok {
 		return afsys.WithAuthMethod(&wrappedAuth{auth: auth})
@@ -87,7 +87,7 @@ var (
 //	UserPassAuthMethod
 //	TokenAuthMethod
 //
-// Deprecated: use [github.com/hairyhenderson/go-fsimpl/vaultfs/vaultauth.EnvAuthMethod] instead
+// Deprecated: use [github.com/helmwave/go-fsimpl/vaultfs/vaultauth.EnvAuthMethod] instead
 func EnvAuthMethod() AuthMethod {
 	return &envAuthMethod{
 		// sorted in order of precedence
@@ -144,7 +144,7 @@ func (m *envAuthMethod) Logout(ctx context.Context, client *api.Client) (err err
 //
 // See also https://www.vaultproject.io/docs/auth/token
 //
-// Deprecated: use [github.com/hairyhenderson/go-fsimpl/vaultfs/vaultauth.TokenAuthMethod] instead
+// Deprecated: use [github.com/helmwave/go-fsimpl/vaultfs/vaultauth.TokenAuthMethod] instead
 func TokenAuthMethod(token string) AuthMethod {
 	return &tokenAuthMethod{token: token, fsys: os.DirFS("/")}
 }
@@ -251,7 +251,7 @@ func (m *appRoleAuthMethod) Logout(ctx context.Context, client *api.Client) erro
 //
 // See also https://www.vaultproject.io/docs/auth/github
 //
-// Deprecated: use [github.com/hairyhenderson/go-fsimpl/vaultfs/vaultauth.GitHubAuthMethod] instead
+// Deprecated: use [github.com/helmwave/go-fsimpl/vaultfs/vaultauth.GitHubAuthMethod] instead
 func GitHubAuthMethod(ghtoken, mount string) AuthMethod {
 	return &gitHubAuthMethod{
 		fsys:    os.DirFS("/"),

@@ -15,10 +15,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/internal"
-	"github.com/hairyhenderson/go-fsimpl/internal/tests"
 	"github.com/hashicorp/consul/api"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/internal"
+	"github.com/helmwave/go-fsimpl/internal/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -21,9 +21,9 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/transport/client"
 	"github.com/go-git/go-git/v5/plumbing/transport/server"
 	"github.com/go-git/go-git/v5/storage/filesystem"
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/internal/billyadapter"
-	"github.com/hairyhenderson/go-fsimpl/internal/tests"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/internal/billyadapter"
+	"github.com/helmwave/go-fsimpl/internal/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/gitfs"
-	"github.com/hairyhenderson/go-fsimpl/internal/tests"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/gitfs"
+	"github.com/helmwave/go-fsimpl/internal/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	tfs "gotest.tools/v3/fs"

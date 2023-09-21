@@ -1,4 +1,4 @@
-module github.com/hairyhenderson/go-fsimpl
+module github.com/helmwave/go-fsimpl
 
 go 1.21
 

@@ -18,8 +18,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	smtypes "github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/internal"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/internal"
 )
 
 // withSMClienter is an fs.FS that can be configured to use the given Secrets

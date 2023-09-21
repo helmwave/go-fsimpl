@@ -68,7 +68,7 @@ See the individual package documentation for more details.
 Use `go get` to install the latest version of `go-fsimpl`:
 
 ```console
-$ go get -u github.com/hairyhenderson/go-fsimpl
+$ go get -u github.com/helmwave/go-fsimpl
 ```
 
 ## Usage
@@ -79,7 +79,7 @@ If you know that you want an HTTP filesystem, for example:
 import (
 	"net/url"
 
-	"github.com/hairyhenderson/go-fsimpl/httpfs"
+	"github.com/helmwave/go-fsimpl/httpfs"
 )
 
 func main() {
@@ -98,11 +98,11 @@ with a user-provided URL), you can use a filesystem mux:
 
 ```go
 import (
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/blobfs"
-	"github.com/hairyhenderson/go-fsimpl/filefs"
-	"github.com/hairyhenderson/go-fsimpl/gitfs"
-	"github.com/hairyhenderson/go-fsimpl/httpfs"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/blobfs"
+	"github.com/helmwave/go-fsimpl/filefs"
+	"github.com/helmwave/go-fsimpl/gitfs"
+	"github.com/helmwave/go-fsimpl/httpfs"
 )
 
 func main() {
@@ -136,10 +136,10 @@ You will require `git` including `git daemon` and `consul` executables on your p
 
 Copyright (c) 2021-2022 Dave Henderson
 
-[godocs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl
-[godoc-image]: https://pkg.go.dev/badge/github.com/hairyhenderson/go-fsimpl
-[gh-actions-image]: https://github.com/hairyhenderson/go-fsimpl/workflows/Build/badge.svg?branch=main
-[gh-actions-url]: https://github.com/hairyhenderson/go-fsimpl/actions?workflow=Build&branch=main
+[godocs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl
+[godoc-image]: https://pkg.go.dev/badge/github.com/helmwave/go-fsimpl
+[gh-actions-image]: https://github.com/helmwave/go-fsimpl/workflows/Build/badge.svg?branch=main
+[gh-actions-url]: https://github.com/helmwave/go-fsimpl/actions?workflow=Build&branch=main
 
 [AWS SMP]: https://aws.amazon.com/systems-manager/features#Parameter_Store
 [AWS Secrets Manager]: https://aws.amazon.com/secrets-manager
@@ -149,13 +149,13 @@ Copyright (c) 2021-2022 Dave Henderson
 [Google Cloud Storage]: https://cloud.google.com/storage/
 [Azure Blob Storage]: https://azure.microsoft.com/en-us/services/storage/blobs/
 
-[awssmfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/awssmfs
-[awssmpfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/awssmpfs
-[blobfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/blobfs
-[consulfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/consulfs
-[filefs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/filefs
-[gitfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/gitfs
-[blobfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/blobfs
-[httpfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/httpfs
-[blobfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/blobfs
-[vaultfs]: https://pkg.go.dev/github.com/hairyhenderson/go-fsimpl/vaultfs
+[awssmfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/awssmfs
+[awssmpfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/awssmpfs
+[blobfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/blobfs
+[consulfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/consulfs
+[filefs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/filefs
+[gitfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/gitfs
+[blobfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/blobfs
+[httpfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/httpfs
+[blobfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/blobfs
+[vaultfs]: https://pkg.go.dev/github.com/helmwave/go-fsimpl/vaultfs

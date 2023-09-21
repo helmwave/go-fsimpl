@@ -15,9 +15,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/internal"
 	"github.com/hashicorp/consul/api"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/internal"
 )
 
 type consulFS struct {

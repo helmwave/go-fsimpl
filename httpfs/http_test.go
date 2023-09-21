@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/internal/tests"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/internal/tests"
 	"github.com/stretchr/testify/assert"
 )
 

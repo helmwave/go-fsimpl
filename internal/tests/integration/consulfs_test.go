@@ -8,10 +8,10 @@ import (
 	"testing"
 	"testing/fstest"
 
-	"github.com/hairyhenderson/go-fsimpl/consulfs"
-	"github.com/hairyhenderson/go-fsimpl/internal/tests"
 	"github.com/hashicorp/consul/api"
 	vaultapi "github.com/hashicorp/vault/api"
+	"github.com/helmwave/go-fsimpl/consulfs"
+	"github.com/helmwave/go-fsimpl/internal/tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	gotestfs "gotest.tools/v3/fs"

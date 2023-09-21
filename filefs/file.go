@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/hairyhenderson/go-fsimpl"
+	"github.com/helmwave/go-fsimpl"
 )
 
 type fileFS struct {

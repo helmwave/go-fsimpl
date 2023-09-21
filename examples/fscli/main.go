@@ -60,8 +60,8 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/autofs"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/autofs"
 )
 
 func parseFlags(args []string) (string, []string) {

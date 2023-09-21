@@ -15,10 +15,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/hairyhenderson/go-fsimpl"
-	"github.com/hairyhenderson/go-fsimpl/internal"
-	"github.com/hairyhenderson/go-fsimpl/vaultfs/vaultauth"
 	"github.com/hashicorp/vault/api"
+	"github.com/helmwave/go-fsimpl"
+	"github.com/helmwave/go-fsimpl/internal"
+	"github.com/helmwave/go-fsimpl/vaultfs/vaultauth"
 )
 
 type vaultFS struct {

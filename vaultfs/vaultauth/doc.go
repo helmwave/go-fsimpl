@@ -1,5 +1,5 @@
 // Package vaultauth provides an interface to a few custom Vault auth methods
-// for use with [github.com/hairyhenderson/go-fsimpl/vaultfs], but which can
+// for use with [github.com/helmwave/go-fsimpl/vaultfs], but which can
 // also be used directly with a [*github.com/hashicorp/vault/api.Client].
 //
 // See also these auth methods provided with the Vault API:

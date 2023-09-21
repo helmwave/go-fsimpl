@@ -8,8 +8,20 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/hairyhenderson/go-fsimpl/internal"
+	"github.com/helmwave/go-fsimpl/internal"
 )
+
+type WriteableFS interface {
+	fs.FS
+
+	OpenFile(string, int, fs.FileMode) (fs.File, error)
+	Create(string) (fs.File, error)
+	Mkdir(string, fs.FileMode) error
+	MkdirAll(string, fs.FileMode) error
+	Remove(string) error
+	RemoveAll(string) error
+	Rename(string, string) error
+}
 
 // WithContextFS injects a context into the filesystem fs, if the filesystem
 // supports it (i.e. has a WithContext method). This can be used to propagate

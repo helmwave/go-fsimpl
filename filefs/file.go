@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 
 	"github.com/helmwave/go-fsimpl"
-	"github.com/helmwave/go-fsimpl/internal"
 )
 
 type fileFS struct {
@@ -59,13 +58,13 @@ func pathForDirFS(u *url.URL) string {
 var FS = fsimpl.FSProviderFunc(New, "file")
 
 var (
-	_ fs.FS                = (*fileFS)(nil)
-	_ fs.ReadDirFS         = (*fileFS)(nil)
-	_ fs.ReadFileFS        = (*fileFS)(nil)
-	_ fs.StatFS            = (*fileFS)(nil)
-	_ fs.GlobFS            = (*fileFS)(nil)
-	_ fs.SubFS             = (*fileFS)(nil)
-	_ internal.WriteableFS = (*fileFS)(nil)
+	_ fs.FS              = (*fileFS)(nil)
+	_ fs.ReadDirFS       = (*fileFS)(nil)
+	_ fs.ReadFileFS      = (*fileFS)(nil)
+	_ fs.StatFS          = (*fileFS)(nil)
+	_ fs.GlobFS          = (*fileFS)(nil)
+	_ fs.SubFS           = (*fileFS)(nil)
+	_ fsimpl.WriteableFS = (*fileFS)(nil)
 )
 
 func (f *fileFS) dirFS() fs.FS {
@@ -100,11 +99,11 @@ func (f *fileFS) Sub(name string) (fs.FS, error) {
 	return fs.Sub(f.dirFS(), name)
 }
 
-func (f *fileFS) OpenFile(name string, flag int, perm fs.FileMode) (internal.WriteableFile, error) {
+func (f *fileFS) OpenFile(name string, flag int, perm fs.FileMode) (fsimpl.WriteableFile, error) {
 	return os.OpenFile(f.join(name), flag, perm)
 }
 
-func (f *fileFS) Create(name string) (internal.WriteableFile, error) {
+func (f *fileFS) Create(name string) (fsimpl.WriteableFile, error) {
 	return os.Create(f.join(name))
 }
 

@@ -77,7 +77,7 @@ var (
 	_ fs.SubFS                  = (*blobFS)(nil)
 	_ internal.WithContexter    = (*blobFS)(nil)
 	_ internal.WithHTTPClienter = (*blobFS)(nil)
-	_ internal.WriteableFS      = (*blobFS)(nil)
+	_ fsimpl.WriteableFS        = (*blobFS)(nil)
 )
 
 func (f blobFS) WithContext(ctx context.Context) fs.FS {
@@ -479,12 +479,12 @@ func (f *blobFile) ReadDir(n int) ([]fs.DirEntry, error) {
 	return dirents, nil
 }
 
-func (f blobFS) OpenFile(name string, _ int, _ fs.FileMode) (internal.WriteableFile, error) {
+func (f blobFS) OpenFile(name string, _ int, _ fs.FileMode) (fsimpl.WriteableFile, error) {
 	return f.Create(name)
 
 }
 
-func (f blobFS) Create(name string) (internal.WriteableFile, error) {
+func (f blobFS) Create(name string) (fsimpl.WriteableFile, error) {
 	if !fs.ValidPath(name) {
 		return nil, &fs.PathError{Op: "open", Path: name, Err: fs.ErrInvalid}
 	}

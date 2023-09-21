@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	"io"
 	"io/fs"
 	"net/http"
 	"time"
@@ -94,4 +95,21 @@ type WithHTTPClienter interface {
 // WithHeaderer is an fs.FS that can be configured to send a custom http.Header
 type WithHeaderer interface {
 	WithHeader(headers http.Header) fs.FS
+}
+
+type WriteableFile interface {
+	fs.File
+	io.WriteCloser
+}
+
+type WriteableFS interface {
+	fs.FS
+
+	OpenFile(string, int, fs.FileMode) (WriteableFile, error)
+	Create(string) (WriteableFile, error)
+	Mkdir(string, fs.FileMode) error
+	MkdirAll(string, fs.FileMode) error
+	Remove(string) error
+	RemoveAll(string) error
+	Rename(string, string) error
 }

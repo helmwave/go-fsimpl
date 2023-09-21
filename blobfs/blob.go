@@ -77,6 +77,7 @@ var (
 	_ fs.SubFS                  = (*blobFS)(nil)
 	_ internal.WithContexter    = (*blobFS)(nil)
 	_ internal.WithHTTPClienter = (*blobFS)(nil)
+	_ internal.WriteableFS      = (*blobFS)(nil)
 )
 
 func (f blobFS) WithContext(ctx context.Context) fs.FS {
@@ -310,6 +311,7 @@ func (f *blobFS) cleanS3URL(u url.URL) url.URL {
 type blobFile struct {
 	ctx       context.Context
 	reader    *blob.Reader
+	writer    *blob.Writer
 	bucket    *blob.Bucket
 	fi        fs.FileInfo
 	listIter  *blob.ListIterator
@@ -321,11 +323,21 @@ type blobFile struct {
 var _ fs.ReadDirFile = (*blobFile)(nil)
 
 func (f *blobFile) Close() error {
-	if f.reader == nil {
-		return nil
+	if f.reader != nil {
+		err := f.reader.Close()
+		if err != nil {
+			return err
+		}
 	}
 
-	return f.reader.Close()
+	if f.writer != nil {
+		err := f.writer.Close()
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (f *blobFile) Read(p []byte) (int, error) {
@@ -339,6 +351,19 @@ func (f *blobFile) Read(p []byte) (int, error) {
 	}
 
 	return f.reader.Read(p)
+}
+
+func (f *blobFile) Write(p []byte) (int, error) {
+	if f.writer == nil {
+		r, err := f.bucket.NewWriter(f.ctx, path.Join(f.root, f.name), nil)
+		if err != nil {
+			return 0, &fs.PathError{Op: "read", Path: f.name, Err: err}
+		}
+
+		f.writer = r
+	}
+
+	return f.writer.Write(p)
 }
 
 func (f *blobFile) Stat() (fs.FileInfo, error) {
@@ -452,4 +477,88 @@ func (f *blobFile) ReadDir(n int) ([]fs.DirEntry, error) {
 	}
 
 	return dirents, nil
+}
+
+func (f blobFS) OpenFile(name string, _ int, _ fs.FileMode) (internal.WriteableFile, error) {
+	return f.Create(name)
+
+}
+
+func (f blobFS) Create(name string) (internal.WriteableFile, error) {
+	if !fs.ValidPath(name) {
+		return nil, &fs.PathError{Op: "open", Path: name, Err: fs.ErrInvalid}
+	}
+
+	if f.bucket == nil {
+		bucket, err := f.openBucket()
+		if err != nil {
+			return nil, fmt.Errorf("open bucket: %w", err)
+		}
+
+		f.bucket = bucket
+	}
+
+	file := &blobFile{
+		ctx:       f.ctx,
+		name:      strings.TrimPrefix(path.Base(name), "."),
+		bucket:    f.bucket,
+		root:      strings.TrimPrefix(path.Join(f.root, path.Dir(name)), "."),
+		pageToken: blob.FirstPageToken,
+	}
+
+	return file, nil
+}
+
+func (f blobFS) Mkdir(_ string, _ fs.FileMode) error {
+	return nil
+}
+
+func (f blobFS) MkdirAll(_ string, _ fs.FileMode) error {
+	return nil
+}
+
+func (f blobFS) Remove(name string) error {
+	if !fs.ValidPath(name) {
+		return &fs.PathError{Op: "readFile", Path: name, Err: fs.ErrInvalid}
+	}
+
+	if f.bucket == nil {
+		bucket, err := f.openBucket()
+		if err != nil {
+			return fmt.Errorf("open bucket: %w", err)
+		}
+
+		f.bucket = bucket
+	}
+
+	return f.bucket.Delete(f.ctx, path.Join(f.root, name))
+}
+
+func (f blobFS) RemoveAll(name string) error {
+	return f.Remove(name)
+}
+
+func (f blobFS) Rename(oldpath string, newpath string) error {
+	if !fs.ValidPath(oldpath) {
+		return &fs.PathError{Op: "readFile", Path: oldpath, Err: fs.ErrInvalid}
+	}
+	if !fs.ValidPath(newpath) {
+		return &fs.PathError{Op: "readFile", Path: newpath, Err: fs.ErrInvalid}
+	}
+
+	if f.bucket == nil {
+		bucket, err := f.openBucket()
+		if err != nil {
+			return fmt.Errorf("open bucket: %w", err)
+		}
+
+		f.bucket = bucket
+	}
+
+	err := f.bucket.Copy(f.ctx, path.Join(f.root, oldpath), path.Join(f.root, newpath), nil)
+	if err != nil {
+		return err
+	}
+
+	return f.bucket.Delete(f.ctx, path.Join(f.root, oldpath))
 }

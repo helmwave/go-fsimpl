@@ -67,36 +67,32 @@ var (
 	_ fsimpl.WriteableFS = (*fileFS)(nil)
 )
 
-func (f *fileFS) dirFS() fs.FS {
-	return os.DirFS(f.root)
-}
-
 func (f *fileFS) join(path string) string {
 	return filepath.Join(f.root, path)
 }
 
 func (f *fileFS) Open(name string) (fs.File, error) {
-	return f.dirFS().Open(name)
+	return os.Open(f.join(name))
 }
 
 func (f *fileFS) ReadFile(name string) ([]byte, error) {
-	return fs.ReadFile(f.dirFS(), name)
+	return os.ReadFile(f.join(name))
 }
 
 func (f *fileFS) ReadDir(name string) ([]fs.DirEntry, error) {
-	return fs.ReadDir(f.dirFS(), name)
+	return os.ReadDir(f.join(name))
 }
 
 func (f *fileFS) Stat(name string) (fs.FileInfo, error) {
-	return fs.Stat(f.dirFS(), name)
+	return os.Stat(f.join(name))
 }
 
 func (f *fileFS) Glob(name string) ([]string, error) {
-	return fs.Glob(f.dirFS(), name)
+	return filepath.Glob(f.join(name))
 }
 
 func (f *fileFS) Sub(name string) (fs.FS, error) {
-	return fs.Sub(f.dirFS(), name)
+	return &fileFS{root: f.join(name)}, nil
 }
 
 func (f *fileFS) OpenFile(name string, flag int, perm fs.FileMode) (fsimpl.WriteableFile, error) {

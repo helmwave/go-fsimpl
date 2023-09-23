@@ -562,3 +562,37 @@ func (f blobFS) Rename(oldpath string, newpath string) error {
 
 	return f.bucket.Delete(f.ctx, path.Join(f.root, oldpath))
 }
+
+func (f blobFS) Stat(name string) (fs.FileInfo, error) {
+	if !fs.ValidPath(name) {
+		return nil, &fs.PathError{Op: "readFile", Path: name, Err: fs.ErrInvalid}
+	}
+
+	if f.bucket == nil {
+		bucket, err := f.openBucket()
+		if err != nil {
+			return nil, fmt.Errorf("open bucket: %w", err)
+		}
+
+		f.bucket = bucket
+	}
+
+	file := &blobFile{
+		ctx:       f.ctx,
+		name:      strings.TrimPrefix(path.Base(name), "."),
+		bucket:    f.bucket,
+		root:      strings.TrimPrefix(path.Join(f.root, path.Dir(name)), "."),
+		pageToken: blob.FirstPageToken,
+	}
+
+	if name == "." {
+		mt := time.Time{}
+		if fakeModTime != nil {
+			mt = *fakeModTime
+		}
+
+		file.fi = internal.DirInfo(file.name, mt)
+	}
+
+	return file.Stat()
+}

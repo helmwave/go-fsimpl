@@ -12,6 +12,7 @@ type WriteableFile interface {
 
 type WriteableFS interface {
 	fs.FS
+	fs.StatFS
 
 	OpenFile(string, int, fs.FileMode) (WriteableFile, error)
 	Create(string) (WriteableFile, error)

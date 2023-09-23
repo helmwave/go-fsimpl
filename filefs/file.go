@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/helmwave/go-fsimpl"
 )
@@ -68,7 +69,7 @@ var (
 )
 
 func (f *fileFS) join(path string) string {
-	if path[0] == os.PathSeparator {
+	if strings.HasPrefix(path, string(os.PathSeparator)) {
 		return path
 	}
 

@@ -68,6 +68,10 @@ var (
 )
 
 func (f *fileFS) join(path string) string {
+	if path[0] == os.PathSeparator {
+		return path
+	}
+
 	return filepath.Join(f.root, path)
 }
 

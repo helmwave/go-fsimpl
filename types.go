@@ -22,3 +22,9 @@ type WriteableFS interface {
 	RemoveAll(string) error
 	Rename(string, string) error
 }
+
+type CurrentPathFS interface {
+	fs.FS
+
+	CurrentPath() string
+}

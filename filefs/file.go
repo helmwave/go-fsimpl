@@ -59,13 +59,14 @@ func pathForDirFS(u *url.URL) string {
 var FS = fsimpl.FSProviderFunc(New, "file")
 
 var (
-	_ fs.FS              = (*fileFS)(nil)
-	_ fs.ReadDirFS       = (*fileFS)(nil)
-	_ fs.ReadFileFS      = (*fileFS)(nil)
-	_ fs.StatFS          = (*fileFS)(nil)
-	_ fs.GlobFS          = (*fileFS)(nil)
-	_ fs.SubFS           = (*fileFS)(nil)
-	_ fsimpl.WriteableFS = (*fileFS)(nil)
+	_ fs.FS                = (*fileFS)(nil)
+	_ fs.ReadDirFS         = (*fileFS)(nil)
+	_ fs.ReadFileFS        = (*fileFS)(nil)
+	_ fs.StatFS            = (*fileFS)(nil)
+	_ fs.GlobFS            = (*fileFS)(nil)
+	_ fs.SubFS             = (*fileFS)(nil)
+	_ fsimpl.WriteableFS   = (*fileFS)(nil)
+	_ fsimpl.CurrentPathFS = (*fileFS)(nil)
 )
 
 func (f *fileFS) join(path string) string {
@@ -126,4 +127,8 @@ func (f *fileFS) RemoveAll(path string) error {
 
 func (f *fileFS) Rename(oldpath, newpath string) error {
 	return os.Rename(f.join(oldpath), f.join(newpath))
+}
+
+func (f *fileFS) CurrentPath() string {
+	return f.root
 }
